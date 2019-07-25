@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+ id="WebApp_ID"
+  version="3.1">
+  <display-name>FirstWebDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Servlet配置 -->
+  <servlet>
+ 	 <servlet-name>demo1</servlet-name>
+ 	 <servlet-class>FirstPackage.ServerletDemo1</servlet-class>
+ 	 <!--制定Servlet的创建时机  
+ 	 第一次访问时创建：<load-on-startup>值为负数（默认也是负数）
+ 	 服务器启动时创建：<load-on-startup>值为正整数或0
+ 	 -->
+ 	 <load-on-startup>-1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  	<!-- 这里的name对应上面需要映射的name -->
+  	<servlet-name>demo1</servlet-name>
+  	<url-pattern>/demo1</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
