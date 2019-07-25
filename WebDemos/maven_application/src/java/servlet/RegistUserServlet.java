@@ -50,7 +50,5 @@ public class RegistUserServlet extends HttpServlet {
 
         resp.setContentType("application/json;charset=utf-8");
         resp.getWriter().write(json);
-
-
     }
 }
