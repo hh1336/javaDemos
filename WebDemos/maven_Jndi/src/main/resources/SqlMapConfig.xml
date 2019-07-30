@@ -14,12 +14,8 @@
 <!--            事务类型-->
             <transactionManager type="JDBC"></transactionManager>
 <!--            配置数据源（连接池）-->
-            <dataSource type="POOLED">
-                <property name="driver" value="${driver}"/>
-                <property name="url" value="${url}"/>
-                <property name="username" value="${username}"/>
-                <property name="password" value=""/>
-
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:comp/env/jdbc/demo"/>
             </dataSource>
         </environment>
     </environments>

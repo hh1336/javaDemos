@@ -4,16 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!--mybatis的主要配置文件-->
 <configuration>
-    <properties resource="jdbcConfig.properties">
-
-    </properties>
+    <properties resource="jdbcConfig.properties"></properties>
+    <settings>
+        <!--        开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--        false为按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
     <!--配置环境-->
     <environments default="mysql">
-<!--        配置mysql的环境-->
+        <!--        配置mysql的环境-->
         <environment id="mysql">
-<!--            事务类型-->
+            <!--            事务类型-->
             <transactionManager type="JDBC"></transactionManager>
-<!--            配置数据源（连接池）-->
+            <!--            配置数据源（连接池）-->
             <dataSource type="POOLED">
                 <property name="driver" value="${driver}"/>
                 <property name="url" value="${url}"/>
@@ -25,12 +29,12 @@
     </environments>
 
 
-<!--    配置接口文件映射-->
+    <!--    配置接口文件映射-->
     <mappers>
-<!--        <mapper resource="IService/IUser.xml"></mapper>-->
-<!--        <mapper class="IService.IUser"></mapper>-->
+        <!--        <mapper resource="IService/IUser.xml"></mapper>-->
+        <!--        <mapper class="IService.IUser"></mapper>-->
 
-<!--        识别接口对应的配置文件，name为包名-->
+        <!--        识别接口对应的配置文件，name为包名-->
         <package name="IService"/>
     </mappers>
 
