@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    Spring默认使用单例模式来创建实例
+            bean标签有一个scope属性可以用来设置模式
+            1.singleton:单例模式
+            2.prototype:多例模式
+            3.request：作用于web请求范围
+            4.session：作用于web会话范围
+            5.global-session：作用于集群环境的会话范围
+    -->
+
+    <!-- __________________________普通方式__________________________________ -->
+    <!--    将实现类交给spring管理-->
+    <!--    只配置了id和class时，spring会用默认的构造函数来帮助创建这个实现-->
+    <!--    <bean id="accountService" class="service.impl.AccountServiceImpl"></bean>-->
+
+    <!-- ___________________________普通工厂模式________________________________________ -->
+    <!--    先使用spring返回工厂实例
+            再通过工厂实例id来调用工厂指定的方法来得到实例-->
+    <!--    <bean id="myfactory" class="factory.Instancefactory"></bean>-->
+    <!--    <bean id="accountService" factory-bean="myfactory" factory-method="getAccountService"></bean>-->
+
+    <!-- ________________________通过静态工厂返回对应的实例__________________________ -->
+    <!--<bean id="accountService"
+          class="factory.Staticfactory"
+          factory-method="getAccountService"
+          init-method="init"
+          destroy-method="destory"
+    ></bean> -->
+    <!--  init-method在实例创建时执行某个方法
+        destroy-method在实例销毁时执行某个方法
+      -->
+
+    <!-- _______________________bean对象的生命周期_____________________________________ -->
+    <!--
+        单例模式：
+        1.创建
+        2.使用
+        3.手动销毁
+        多例模式：
+        1.创建
+        2.使用
+        3.等待GC回收
+    -->
+
+    <!-- ***********************************依赖注入********************************** -->
+
+    <!-- _______________________________构造函数注入____________________________________ -->
+    <!--
+            使用<constructor-arg>标签
+            标签的属性：
+            1.type:按照数据类型给对应的数据类型赋值
+            2.index:按照索引给数据赋值，索引从0开始
+            3.name:按照名称给制定数据赋值
+            4.value:赋值内容
+            5.ref:引用一个bean标签创建好的数据
+    -->
+    <bean id="time_now" class="java.util.Date"></bean>
+    <bean id="accountService" class="service.impl.AccountServiceImpl">
+        <constructor-arg name="name" value="张三"></constructor-arg>
+        <constructor-arg name="age" value="10"></constructor-arg>
+        <constructor-arg name="time" ref="time_now"></constructor-arg>
+    </bean>
+
+    <!-- _______________________________set方法注入____________________________________ -->
+    <!--
+            创建实例时，可以指定对应的set方法给实例内部的属性进行赋值
+            property标签的属性：
+            name:填入对应的set方法名
+            value:所需要的值
+            ref:所需要的bean类型的值
+    -->
+    <bean id="accountService2" class="service.impl.AccountServiceImpl2">
+        <property name="name" value="王五"></property>
+        <property name="age" value="11"></property>
+        <property name="time" ref="time_now"></property>
+    </bean>
+
+    <!-- ___________________________复杂/数组集合类型注入__________________________ -->
+    <!--
+            只需要记住<list>标签和<map>标签即可
+            数据结构相同，可以使用同类型数据结构的其他标签
+    -->
+    <bean id="accountService3" class="service.impl.AccountServiceImpl3">
+        <property name="myList">
+            <list>
+                <value>123</value>
+                <value>456</value>
+            </list>
+        </property>
+
+        <property name="myStrs">
+            <array>
+                <value>str1</value>
+                <value>str2</value>
+            </array>
+        </property>
+        <property name="myMap">
+            <map>
+                <entry key="map1" value="111"></entry>
+                <entry key="map2" value="222"></entry>
+            </map>
+        </property>
+        <property name="mySet">
+            <set>
+                <value>set1</value>
+                <value>set2</value>
+            </set>
+        </property>
+        <property name="myPropertie>">
+            <props>
+                <prop key="111">222</prop>
+                <prop key="333">444</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

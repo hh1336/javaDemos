@@ -15,14 +15,12 @@ public interface IUser {
      * 查询所有数据
      * @return
      */
-    @Select("select * from users")
     List<User> findAll();
 
     /**
      * 保存方法
      * @param user
      */
-    //@Insert()
     void saveUser(User user);
 
     /**

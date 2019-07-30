@@ -2,19 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="IService.IUser">
-<!--    配置对应方法名和返回值类型-->
-<!--    <select id="findAll" resultType="domain.User">-->
-<!--        select * from users-->
-<!--    </select>-->
+    <!--    让该接口支持二级缓存-->
+    <cache/>
 
+    <!--    useCache设为true使该方法支持二级缓存-->
+    <select id="findAll" useCache="true" resultType="domain.User">
+        select * from users
+    </select>
     <insert id="saveUser" parameterType="domain.User">
--- 插入并返回id
-<selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
-    select last_insert_id();
-</selectKey>
+        -- 插入并返回id
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
         insert into users values (#{id},#{name},#{age},#{address});
     </insert>
-    
+
     <update id="updateUser" parameterType="domain.User">
         update users set name=#{name},age=#{age},address=#{address}
         where id = #{id};

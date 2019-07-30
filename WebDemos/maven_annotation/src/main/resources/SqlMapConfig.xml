@@ -5,14 +5,14 @@
 <!--mybatis的主要配置文件-->
 <configuration>
     <properties resource="jdbcConfig.properties"></properties>
+    <!--    开启二级缓存-->
     <settings>
-        <!--        开启延迟加载-->
-        <setting name="lazyLoadingEnabled" value="true"/>
-        <!--        false为按需加载-->
-        <setting name="aggressiveLazyLoading" value="false"/>
-        <!--        开启缓存-->
         <setting name="cacheEnabled" value="true"/>
     </settings>
+    <!--    配置实体类别名-->
+    <typeAliases>
+        <package name="domain"/>
+    </typeAliases>
     <!--配置环境-->
     <environments default="mysql">
         <!--        配置mysql的环境-->
@@ -33,11 +33,7 @@
 
     <!--    配置接口文件映射-->
     <mappers>
-        <!--        <mapper resource="IService/IUser.xml"></mapper>-->
-        <!--        <mapper class="IService.IUser"></mapper>-->
-
-        <!--        识别接口对应的配置文件，name为包名-->
-        <package name="IService"/>
+        <package name="dao"/>
     </mappers>
 
 </configuration>
